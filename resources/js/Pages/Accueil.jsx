@@ -1,3 +1,4 @@
+import {Link} from '@inertiajs/react';
 export default function Accueil() {
     return (
         <main className= "max-width-7xl mx-auto bg-slate-950 min-h-screen">
@@ -8,9 +9,9 @@ export default function Accueil() {
                 Nous sommes ravis de vous accueillir dans notre espace aquatique !
             </p>
             <div className="flex justify-center mt-8">
-                <button className="bg-blue-500 text-white px-6 py-3 rounded-lg mt-4 hover:bg-blue-600 mb-8">
+                <Link href="/site" className="bg-blue-500 text-white px-6 py-3 rounded-lg mt-4 hover:bg-blue-600 mb-8">
                     Visitez notre site
-                </button>
+                </Link>
             </div>
         </main>
     );

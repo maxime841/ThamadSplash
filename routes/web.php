@@ -14,6 +14,34 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/site', function () {
+    return Inertia::render('Site');
+});
+
+Route::get('/parc', function () {
+    return Inertia::render('Parc');
+});
+
+Route::get('/school', function () {
+    return Inertia::render('Ecole');
+});
+
+Route::get('/club', function () {
+    return Inertia::render('Club');
+});
+
+Route::get('/rent', function () {
+    return Inertia::render('Location');
+});
+
+Route::get('/activities', function () {
+    return Inertia::render('Activites');
+});
+
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
