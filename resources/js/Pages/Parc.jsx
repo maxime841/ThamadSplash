@@ -1,11 +1,13 @@
 import Navbar from '../Components/Navbar';
+import { Link } from '@inertiajs/react';
+
 export default function Parc() {
     return (
-        <body>
+        <>
             <header>
                 <Navbar />
             </header>
-            <main className= "max-width-7xl mx-auto min-h-screen bg-gradient-to-b from-cyan-100 via-sky-200 to-blue-300">
+            <main className= "max-w-7xl mx-auto min-h-screen bg-gradient-to-b from-cyan-100 via-sky-200 to-blue-300">
                 <section className="h-70vh bg-cover bg-center text-white bg-gradient to-b from-black/30 via-black/40 to-black/60">
                     <h1 className="text-5xl md:text-8xl font-extrabold text-center bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-700 bg-clip-text text-transparent 
                     drop-shadow tracking-wide ">Parc aquatique Thamad Splash </h1>
@@ -13,7 +15,7 @@ export default function Parc() {
                 </section>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 md:px-8 lg:px-16 py-12">
                     <div className="lg:col-span-2">
-                        <img src="/images/parc.jpg" alt="Parc aquatique Thamad Splash" className="w-full h-auto rounded-2xl shadow-lg mb-6" />
+                        <img src="/images/Parc_aquatique_ThamadSplash.png" alt="Parc aquatique Thamad Splash" className="w-full h-auto rounded-2xl shadow-lg mb-6" />
                         <p className="text-lg text-gray-700 mb-6">
                             Le parc aquatique Thamad Splash est un lieu de divertissement idéal pour les familles, les amis et les amateurs de sensations fortes. 
                             Avec une variété d'attractions aquatiques, des toboggans palpitants aux piscines relaxantes, il y en a pour tous les goûts.
@@ -37,7 +39,7 @@ export default function Parc() {
                 </div>
                 
                 <section className="py-12 px-4 md:px-8 lg:px-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-cyan-700 mb-6">À propos de notre parc aquatique</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-cyan-700 mb-6 max-w-5xl mx-auto leading-8">À propos de notre parc aquatique</h2>
                     <p className="text-lg text-gray-700 mb-6">
                         Bienvenue au parc aquatique Thamad Splash, où l'aventure et le plaisir se rencontrent ! 
                         Vous y trouverez une attraction de tobbogan aquatique, des piscines avec plongeon et animations comprises. Des sliders pour les enfants et des zones de détente pour les adultes.
@@ -52,8 +54,61 @@ export default function Parc() {
                         Venez nous rendre visite et laissez-vous emporter par l'aventure aquatique au parc Thamad Splash !
                     </p>
                 </section>
+                <section className="grid grid-cols-3 lg:grid-cols-2 gap-8 px-4 md:px-8 lg:px-16 py-12">
+                    <h1 className="text-3xl md:text-4xl font-bold text-cyan-700 mb-6 col-span-full">Nos attractions</h1>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Toboggan Hyperslide</h2>
+                        <img src="/images/Toboggan-Hyperslide.png" alt="Toboggan hyperslide" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Hyperslide: Faites le plein de sensations fortes en dévalant un toboggan à grande vitesse.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Adventure Pool</h2>
+                        <img src="/images/Adventure-pool.png" alt="Adventure pool" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Venez vous aventurez dans la piscine adventure avec cascade, toboggan inclus et petits coins secrets</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Piscine Spa Adulte</h2>
+                        <img src="/images/Pool-Spa-Adult.png" alt="Pool spa adult" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Venez vous détendre pendant que vos enfants ou amis s'amusent dans notre parc aquatique.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Slider</h2>
+                        <img src="/images/Slider.png" alt="Slider" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Venez vous amuser sur notre slider avec des glissades rapides.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Espace jeux et détente</h2>
+                        <img src="/images/Games-and-chill.png" alt="Espace jeux et détente" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Venez vous amuser avec nos mini jeux et ainsi que vous détendre avec notre coin bar et spa.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Capitaine Nemo</h2>
+                        <img src="/images/Captain-Nemo.png" alt="Attraction capitaine nemo" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Venez explorez le monde du captaie Nemo. ainsi que d'explorez nos fonds sous marins.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Piscine attractive</h2>
+                        <img src="/images/Pool-attract.png" alt="piscine attractive" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Venez vous amusez dans cette piscine avec toboggan plongeoir et diverse animations.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Roller coaster</h2>
+                        <img src="/images/Roller-coaster.png" alt="Roller coaster" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Sensations fortes garanties avec notre grand huit aquatique. plus piscine avec activités.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Tyrolienne</h2>
+                        <img src="/images/Tyrolienne.png" alt="Tyrolienne" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Venez vous balancer en toute sécurité sur notre tyrolienne.</p>
+                    </card>
+                    <card className="rounded-2xl shadow-lg p-6 bg-white hover:shadow-2xl transition duration-300 border-top-4 border-blue-500">
+                        <h2 className="text-3xl font-bold mb-4 text-cyan-700">Piscine enfants et Adultes</h2>
+                        <img src="/images/Pool-child-with-adult.png" alt="Piscine enfants et adultes" className="w-full h-auto rounded-2xl mb-4" />
+                         <p className="text-gray-600 leading-7">Emmenez vos enfants zooby lullabee dans cette piscine specialement conçue pour eux.</p>
+                    </card>
+                </section>
             </main>
-        </body>
+        </>
         
     );
 }
