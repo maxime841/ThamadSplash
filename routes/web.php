@@ -1,55 +1,44 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 use Inertia\Inertia;
+
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return Inertia::render('Accueil', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
 
-Route::get('/site', function () {
-    return Inertia::render('Site');
+Route::get('/site', fn() => Inertia::render('Site'));
+Route::get('/parc', fn() => Inertia::render('Parc'));
+Route::get('/school', fn() => Inertia::render('Ecole'));
+Route::get('/club', fn() => Inertia::render('Club'));
+Route::get('/rent', fn() => Inertia::render('Location'));
+Route::get('/activities', fn() => Inertia::render('Activites'));
+Route::get('/contact', fn() => Inertia::render('Contact'));
+
+/*
+|--------------------------------------------------------------------------
+| Auth
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+/*
+|--------------------------------------------------------------------------
+| Administration
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+
+    Route::get('/', [DashboardController::class, 'index']);
 });
-
-Route::get('/parc', function () {
-    return Inertia::render('Parc');
-});
-
-Route::get('/school', function () {
-    return Inertia::render('Ecole');
-});
-
-Route::get('/club', function () {
-    return Inertia::render('Club');
-});
-
-Route::get('/rent', function () {
-    return Inertia::render('Location');
-});
-
-Route::get('/activities', function () {
-    return Inertia::render('Activites');
-});
-
-Route::get('/contact', function () {
-    return Inertia::render('Contact');
-});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
