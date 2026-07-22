@@ -1,37 +1,43 @@
+import AdminLayout from "../../Layouts/AdminLayout";
+import StatCard from "../../Components/Admin/StatCard";
+
 export default function Dashboard() {
+
     return (
-        <div className="min-h-screen bg-slate-100">
-            <div className="max-w-7xl mx-auto p-10">
+        <AdminLayout>
 
-                <h1 className="text-5xl font-bold text-cyan-700 mb-8">
-                    Tableau de bord
-                </h1>
+            <h1 className="text-4xl font-bold mb-8">
+                Tableau de bord
+            </h1>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-                    <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h2 className="text-xl font-semibold">🎉 Soirées</h2>
-                        <p className="text-4xl font-bold mt-4">0</p>
-                    </div>
+                <StatCard
+                    title="Soirées"
+                    value="0"
+                    icon="🎉"
+                />
 
-                    <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h2 className="text-xl font-semibold">🏠 Locations</h2>
-                        <p className="text-4xl font-bold mt-4">0</p>
-                    </div>
+                <StatCard
+                    title="Attractions"
+                    value="0"
+                    icon="🎢"
+                />
 
-                    <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h2 className="text-xl font-semibold">🎢 Attractions</h2>
-                        <p className="text-4xl font-bold mt-4">0</p>
-                    </div>
+                <StatCard
+                    title="Locations"
+                    value="0"
+                    icon="🏠"
+                />
 
-                    <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h2 className="text-xl font-semibold">🎯 Activités</h2>
-                        <p className="text-4xl font-bold mt-4">0</p>
-                    </div>
-
-                </div>
+                <StatCard
+                    title="Activités"
+                    value="0"
+                    icon="🎯"
+                />
 
             </div>
-        </div>
+
+        </AdminLayout>
     );
 }
