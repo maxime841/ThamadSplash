@@ -17,4 +17,10 @@ class Party extends Model
     'cover_image',
     'published',
 ];
+
+public function images()
+{
+    return $this->hasMany(PartyImage::class)
+                ->orderBy('sort_order');
+}
 }

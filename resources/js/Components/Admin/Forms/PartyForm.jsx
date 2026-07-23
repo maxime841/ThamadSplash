@@ -1,5 +1,10 @@
 import { useForm } from "@inertiajs/react";
 import { route } from "../../../lib/route";
+import { useState } from "react";
+
+import PartyInformations from "./PartyInformations";
+import PartyMedia from "./PartyMedia";
+import PartyPublication from "./PartyPublication";
 
 export default function PartyForm({ party = null }) {
 
@@ -13,6 +18,10 @@ export default function PartyForm({ party = null }) {
         cover_image: null,
         published: party?.published ?? false,
     });
+
+    const [preview, setPreview] = useState(
+    party?.cover_image ? `/storage/${party.cover_image}` : null
+);
 
     function submit(e) {
         e.preventDefault();
@@ -30,116 +39,25 @@ export default function PartyForm({ party = null }) {
             className="bg-white rounded-2xl shadow-xl p-8 space-y-6"
         >
 
-            <div>
-                <label className="font-semibold">Titre</label>
+            <PartyInformations
+                data={data}
+                setData={setData}
+                errors={errors}
+            />
 
-                <input
-                    type="text"
-                    value={data.title}
-                    onChange={(e) => setData("title", e.target.value)}
-                    className="w-full border rounded-xl p-3 mt-2"
-                />
+            <PartyMedia
+                preview={preview}
+                setPreview={setPreview}
+                setData={setData}
+                errors={errors}
+            />
 
-                {errors.title && (
-                    <p className="text-red-500">{errors.title}</p>
-                )}
-            </div>
-
-            <div>
-                <label className="font-semibold">Sous-titre</label>
-
-                <input
-                    type="text"
-                    value={data.subtitle}
-                    onChange={(e) => setData("subtitle", e.target.value)}
-                    className="w-full border rounded-xl p-3 mt-2"
-                />
-            </div>
-
-            <div>
-                <label className="font-semibold">Description</label>
-
-                <textarea
-                    rows="6"
-                    value={data.description}
-                    onChange={(e) => setData("description", e.target.value)}
-                    className="w-full border rounded-xl p-3 mt-2"
-                />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-
-                <div>
-                    <label>Date</label>
-
-                    <input
-                        type="date"
-                        value={data.event_date}
-                        onChange={(e) => setData("event_date", e.target.value)}
-                        className="w-full border rounded-xl p-3 mt-2"
-                    />
-                </div>
-
-                <div>
-                    <label>Heure</label>
-
-                    <input
-                        type="time"
-                        value={data.event_time}
-                        onChange={(e) => setData("event_time", e.target.value)}
-                        className="w-full border rounded-xl p-3 mt-2"
-                    />
-                </div>
-
-            </div>
-
-            <div>
-
-                <label>DJ</label>
-
-                <input
-                    type="text"
-                    value={data.dj}
-                    onChange={(e) => setData("dj", e.target.value)}
-                    className="w-full border rounded-xl p-3 mt-2"
-                />
-
-            </div>
-
-            <div>
-
-                <label>Image principale</label>
-
-                <input
-                    type="file"
-                    onChange={(e) =>
-                        setData("cover_image", e.target.files[0])
-                    }
-                    className="w-full border rounded-xl p-3 mt-2"
-                />
-
-            </div>
-
-            <div className="flex items-center gap-3">
-
-                <input
-                    type="checkbox"
-                    checked={data.published}
-                    onChange={(e) =>
-                        setData("published", e.target.checked)
-                    }
-                />
-
-                <span>Publier la soirée</span>
-
-            </div>
-
-            <button
-                disabled={processing}
-                className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-xl"
-            >
-                {party ? "Modifier" : "Créer"}
-            </button>
+            <PartyPublication
+                data={data}
+                setData={setData}
+                processing={processing}
+                party={party}
+            />
 
         </form>
     );
