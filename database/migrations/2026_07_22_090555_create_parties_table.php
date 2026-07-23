@@ -1,0 +1,47 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+{
+    Schema::create('parties', function (Blueprint $table) {
+
+        $table->id();
+
+        $table->string('title');
+
+        $table->string('slug')->unique();
+
+        $table->string('subtitle')->nullable();
+
+        $table->longText('description');
+
+        $table->date('event_date')->nullable();
+
+        $table->time('event_time')->nullable();
+
+        $table->string('dj')->nullable();
+
+        $table->string('cover_image')->nullable();
+
+        $table->boolean('published')->default(false);
+
+        $table->timestamps();
+    });
+}
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('parties');
+    }
+};

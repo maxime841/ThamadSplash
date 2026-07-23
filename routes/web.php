@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\PartyController;
 
 Route::get('/', function () {
     return Inertia::render('Accueil', [
@@ -41,4 +42,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+
+    Route::resource('parties', PartyController::class);
+
 });

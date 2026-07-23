@@ -23,8 +23,11 @@ export default function AdminLayout({ children }) {
                         📊 Dashboard
                     </Link>
 
-                    <Link href="/admin/parties" className="block rounded-lg px-4 py-3 hover:bg-slate-800">
-                        🎉 Soirées
+                    <Link
+                        href={route("admin.parties.index")}
+                        className="block px-4 py-3 rounded-lg hover:bg-cyan-600 hover:text-white"
+                    >
+                            🎉 Soirées
                     </Link>
 
                     <Link href="/admin/attractions" className="block rounded-lg px-4 py-3 hover:bg-slate-800">
