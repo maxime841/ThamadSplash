@@ -11,27 +11,33 @@ return new class extends Migration
      */
     public function up(): void
 {
-    Schema::create('party_images', function (Blueprint $table) {
+    Schema::create('media', function (Blueprint $table) {
 
         $table->id();
 
-        $table->foreignId('party_id')
-              ->constrained()
-              ->cascadeOnDelete();
+        // Relation polymorphique
+        $table->morphs('mediable');
 
-        $table->string('image');
+        // Chemin du fichier
+        $table->string('path');
 
+        // Texte alternatif
+        $table->string('alt')->nullable();
+
+        // Ordre d'affichage
         $table->unsignedInteger('sort_order')->default(0);
+
+        // Image principale
+        $table->boolean('is_cover')->default(false);
 
         $table->timestamps();
     });
 }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('party_images');
+        Schema::dropIfExists('media');
     }
 };

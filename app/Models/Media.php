@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PartyImage extends Model
+class Media extends Model
 {
     protected $fillable = [
-        'party_id',
-        'image',
+        'path',
+        'alt',
         'sort_order',
+        'is_cover',
     ];
 
-    public function party()
+    public function mediable()
     {
-        return $this->belongsTo(Party::class);
+        return $this->morphTo();
     }
 }

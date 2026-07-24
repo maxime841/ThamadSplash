@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Media;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Party extends Model
 {
@@ -18,9 +20,9 @@ class Party extends Model
     'published',
 ];
 
-public function images()
+public function media(): MorphMany
 {
-    return $this->hasMany(PartyImage::class)
-                ->orderBy('sort_order');
+    return $this->morphMany(Media::class, 'mediable')
+        ->orderBy('sort_order');
 }
 }

@@ -8,6 +8,9 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 
+use App\Http\Requests\StorePartyRequest;
+use App\Http\Requests\UpdatePartyRequest;
+
 class PartyController extends Controller
 {
 public function index(Request $request)
@@ -41,18 +44,9 @@ public function index(Request $request)
     /**
      * Enregistrement d'une nouvelle soirée.
      */
-    public function store(Request $request)
+    public function store(StorePartyRequest $request)
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'subtitle' => 'nullable|max:255',
-            'description' => 'required',
-            'event_date' => 'nullable|date',
-            'event_time' => 'nullable',
-            'dj' => 'nullable|max:255',
-            'cover_image' => 'nullable|image|max:2048',
-            'published' => 'boolean',
-        ]);
+        $validated = $request->validated();
 
         $validated['slug'] = Str::slug($validated['title']);
 
@@ -79,18 +73,9 @@ public function index(Request $request)
     /**
      * Mise à jour d'une soirée.
      */
-    public function update(Request $request, Party $party)
+    public function update(UpdatePartyRequest $request, Party $party)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'subtitle' => 'nullable|max:255',
-            'description' => 'required',
-            'event_date' => 'nullable|date',
-            'event_time' => 'nullable',
-            'dj' => 'nullable|max:255',
-            'cover_image' => 'nullable|image|max:2048',
-            'published' => 'boolean',
-        ]);
+        $validated = $request->validated();
 
         $validated['slug'] = Str::slug($validated['title']);
 
