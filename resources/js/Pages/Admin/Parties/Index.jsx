@@ -1,140 +1,150 @@
 import AdminLayout from "../../../Layouts/AdminLayout";
-import DataTable from "../../../Components/Admin/DataTable";
-import { Link } from "@inertiajs/react";
+import DataTable from "../../../Components/Admin/Table/DataTable";
+import { Link, router } from "@inertiajs/react";
 import { route } from "../../../lib/route";
 import { Pencil, Trash2, Eye } from "lucide-react";
+import PageLayout from "../../../Components/Admin/Layout/PageLayout";
+import PrimaryButton from "../../../Components/Admin/Button/PrimaryButton";
+import SearchBar from "../../../Components/Admin/Search/SearchBar";
+import Pagination from "../../../Components/Admin/Table/Pagination";
+import { useState } from "react";
+import ConfirmDeleteModal from "../../../Components/Admin/Modal/ConfirmDeleteModal";
 
-export default function Index({ parties }) {
 
-    const columns = [
-    {
-    id: "party",
-    header: "Soirée",
+export default function Index({ parties, filters }) {
 
-    cell: ({ row }) => (
-
-        <div className="flex items-center gap-4">
-
-            {row.original.cover_image ? (
-
-                <img
-                    src={`/storage/${row.original.cover_image}`}
-                    alt={row.original.title}
-                    className="w-20 h-14 rounded-lg object-cover"
-                />
-
-            ) : (
-
-                <div className="w-20 h-14 rounded-lg bg-gray-200 flex items-center justify-center">
-                    📷
-                </div>
-
-            )}
-
-            <div>
-
-                <p className="font-semibold">
-                    {row.original.title}
-                </p>
-
-                <p className="text-sm text-gray-500">
-                    {row.original.dj || "DJ non renseigné"}
-                </p>
-
-            </div>
-
-        </div>
-
-    ),
-},
-    {
-        accessorKey: "event_date",
-        header: "Date",
-    },
-    {
-        accessorKey: "published",
-        header: "Statut",
-        cell: ({ row }) =>
-            row.original.published ? (
-                <span className="px-3 py-1 rounded-full bg-green-100 text-green-700">
-                    Publiée
-                </span>
-            ) : (
-                <span className="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700">
-                    Brouillon
-                </span>
-            ),
-    },
-    {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-
-        <div className="flex items-center gap-3">
-
-            <Link
-                href={route("admin.parties.edit", row.original.id)}
-                className="text-blue-600 hover:text-blue-800"
-            >
-                <Pencil size={18} />
-            </Link>
-
-            <button
-                className="text-red-600 hover:text-red-800"
-            >
-                <Trash2 size={18} />
-            </button>
-
-            <Link
-                href={`/party/${row.original.id}`}
-                className="text-green-600 hover:text-green-800"
-            >
-                <Eye size={18} />
-            </Link>
-
-        </div>
-
-    ),
-}
-];
+    const [open, setOpen] = useState(false);
+    const [selectedParty, setSelectedParty] = useState(null);
 
     return (
-        <AdminLayout>
+        <PageLayout
+    title="Soirées"
+    description="Gestion des soirées"
+    actions={
+        <Link href={route("admin.parties.create")}>
+    <PrimaryButton>
+        Nouvelle soirée
+    </PrimaryButton>
+</Link>
+    }
+>
 
-            <div className="flex justify-between items-center mb-8">
+    {/* Barre de recherche */}
 
-                <div>
-                    <h1 className="text-4xl font-bold">
-                        Gestion des soirées
-                    </h1>
+    <div className="mb-6">
+    <SearchBar
+        value={filters.search || ""}
+        placeholder="Rechercher une soirée..."
+        onChange={(e) =>
+            router.get(
+                route("admin.parties.index"),
+                {
+                    search: e.target.value,
+                },
+                {
+                    preserveState: true,
+                    replace: true,
+                }
+            )
+        }
+    />
+</div>
 
-                    <p className="text-gray-500 mt-2">
-                        Gérez toutes les soirées du club.
-                    </p>
-                </div>
+    {/* Tableau */}
+    <DataTable
+    headers={[
+        "Image",
+        "Titre",
+        "Date",
+        "DJ",
+        "Statut",
+        "Actions",
+    ]}
+>
+    {parties.data.map((party) => (
+        <tr key={party.id}>
+            <td className="px-6 py-4">
+                {party.cover_image ? (
+                    <img
+                        src={`/storage/${party.cover_image}`}
+                        alt={party.title}
+                        className="w-20 h-14 rounded-lg object-cover"
+                    />
+                ) : (
+                    <div className="w-20 h-14 bg-gray-200 rounded-lg flex items-center justify-center">
+                        📷
+                    </div>
+                )}
+            </td>
 
-                <Link
-                    href={route("admin.parties.create")}
-                    className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl"
-                >
-                    + Nouvelle soirée
-                </Link>
+            <td className="px-6 py-4">{party.title}</td>
 
-            </div>
+            <td className="px-6 py-4">{party.event_date}</td>
 
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <td className="px-6 py-4">{party.dj}</td>
 
-                <DataTable
-                    columns={columns}
-                    data={parties.data}
-                />
+            <td className="px-6 py-4">
+                {party.published ? "Publiée" : "Brouillon"}
+            </td>
 
-                <div className="mt-4 text-sm text-gray-500">
-                     Affichage de {parties.from} à {parties.to} sur {parties.total} soirées.
-                </div>
+            <td className="px-6 py-4">
+    <div className="flex items-center gap-3">
+        <Link
+            href={route("admin.parties.edit", party.id)}
+            className="text-blue-600 hover:text-blue-800"
+        >
+            <Pencil size={18} />
+        </Link>
 
-            </div>
+        <button
+    onClick={() => {
+        setSelectedParty(party);
+        setOpen(true);
+    }}
+    className="text-red-600 hover:text-red-800"
+>
+    <Trash2 size={18} />
+</button>
 
-        </AdminLayout>
+        <Link
+            href={`/party/${party.id}`}
+            className="text-green-600 hover:text-green-800"
+        >
+            <Eye size={18} />
+        </Link>
+    </div>
+</td>
+        </tr>
+    ))}
+</DataTable>
+
+<Pagination links={parties.links} />
+
+<ConfirmDeleteModal
+    open={open}
+    title="Supprimer cette soirée ?"
+    message={
+        selectedParty
+            ? `Voulez-vous vraiment supprimer "${selectedParty.title}" ? Cette action est irréversible.`
+            : ""
+    }
+    onCancel={() => {
+        setOpen(false);
+        setSelectedParty(null);
+    }}
+    onConfirm={() => {
+        router.delete(
+            route("admin.parties.destroy", selectedParty.id),
+            {
+                onSuccess: () => {
+                    setOpen(false);
+                    setSelectedParty(null);
+                },
+            }
+        );
+    }}
+/>
+
+</PageLayout>
     );
 }
