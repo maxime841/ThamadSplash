@@ -7,39 +7,64 @@ export default function TextareaField({
     rows = 6,
     required = false,
     placeholder = "",
+    disabled = false,
 }) {
     return (
-        <div className="mb-6">
-            <label
-                htmlFor={name}
-                className="block text-sm font-semibold text-gray-700 mb-2"
-            >
-                {label}
+        <div className="space-y-2">
 
-                {required && (
-                    <span className="text-red-500 ml-1">*</span>
-                )}
-            </label>
+            {label && (
+                <label
+                    htmlFor={name}
+                    className="block text-sm font-medium text-slate-700"
+                >
+                    {label}
+
+                    {required && (
+                        <span className="ml-1 text-red-500">*</span>
+                    )}
+                </label>
+            )}
 
             <textarea
                 id={name}
+                name={name}
                 rows={rows}
                 value={value}
                 placeholder={placeholder}
+                disabled={disabled}
                 onChange={onChange}
-                className={`w-full rounded-xl border px-4 py-3 transition resize-none
+                className={`
+                    w-full
+                    rounded-xl
+                    border
+                    bg-white
+                    px-4
+                    py-3
+                    text-sm
+                    text-slate-800
+                    placeholder:text-slate-400
+                    shadow-sm
+                    resize-none
+                    transition-all
+                    duration-200
+                    focus:outline-none
+                    focus:ring-4
+                    disabled:cursor-not-allowed
+                    disabled:bg-slate-100
                     ${
                         error
-                            ? "border-red-500 focus:ring-red-500"
-                            : "border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
-                    }`}
+                            ? "border-red-300 focus:border-red-500 focus:ring-red-100"
+                            : "border-slate-200 focus:border-cyan-500 focus:ring-cyan-100"
+                    }
+                `}
             />
 
             {error && (
-                <p className="mt-2 text-sm text-red-600">
+                <p className="text-sm font-medium text-red-600">
                     {error}
                 </p>
             )}
+
         </div>
     );
 }

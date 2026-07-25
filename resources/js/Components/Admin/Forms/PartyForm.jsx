@@ -36,28 +36,36 @@ export default function PartyForm({ party = null }) {
     return (
         <form
             onSubmit={submit}
-            className="bg-white rounded-2xl shadow-xl p-8 space-y-6"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
 
-            <PartyInformations
-                data={data}
-                setData={setData}
-                errors={errors}
-            />
+        <div className="lg:col-span-2 space-y-8">
 
-            <PartyMedia
-                preview={preview}
-                setPreview={setPreview}
-                setData={setData}
-                errors={errors}
-            />
+    <PartyInformations
+        data={data}
+        setData={setData}
+        errors={errors}
+    />
 
-            <PartyPublication
-                data={data}
-                setData={setData}
-                processing={processing}
-                party={party}
-            />
+    <PartyMedia
+        preview={preview}
+        setPreview={setPreview}
+        setData={setData}
+        errors={errors}
+    />
+
+</div>
+
+<div>
+
+    <PartyPublication
+        data={data}
+        setData={setData}
+        processing={processing}
+        party={party}
+    />
+
+</div>
 
         </form>
     );

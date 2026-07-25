@@ -17,15 +17,19 @@ export default function Index({ parties, filters }) {
     const [selectedParty, setSelectedParty] = useState(null);
 
     return (
-        <PageLayout
+    <PageLayout
     title="Soirées"
     description="Gestion des soirées"
+    breadcrumb={[
+        { label: "Administration", href: "/admin" },
+        { label: "Soirées" },
+    ]}
     actions={
         <Link href={route("admin.parties.create")}>
-    <PrimaryButton>
-        Nouvelle soirée
-    </PrimaryButton>
-</Link>
+            <PrimaryButton>
+                Nouvelle soirée
+            </PrimaryButton>
+        </Link>
     }
 >
 
@@ -56,14 +60,13 @@ export default function Index({ parties, filters }) {
         "Image",
         "Titre",
         "Date",
-        "DJ",
         "Statut",
         "Actions",
     ]}
 >
     {parties.data.map((party) => (
         <tr key={party.id}>
-            <td className="px-6 py-4">
+            <td className="px-6 py-5 align-middle">
                 {party.cover_image ? (
                     <img
                         src={`/storage/${party.cover_image}`}
@@ -77,21 +80,27 @@ export default function Index({ parties, filters }) {
                 )}
             </td>
 
-            <td className="px-6 py-4">{party.title}</td>
+            <td className="px-6 py-5 align-middle"><div>
+    <p className="font-semibold text-slate-800">
+        {party.title}
+    </p>
 
-            <td className="px-6 py-4">{party.event_date}</td>
+    <p className="text-sm text-slate-500">
+        {party.dj || "DJ non renseigné"}
+    </p>
+</div></td>
 
-            <td className="px-6 py-4">{party.dj}</td>
+            <td className="px-6 py-5 align-middle">{party.event_date}</td>
 
-            <td className="px-6 py-4">
+            <td className="px-6 py-5 align-middle">
                 {party.published ? "Publiée" : "Brouillon"}
             </td>
 
-            <td className="px-6 py-4">
+            <td className="px-6 py-5 align-middle">
     <div className="flex items-center gap-3">
         <Link
             href={route("admin.parties.edit", party.id)}
-            className="text-blue-600 hover:text-blue-800"
+            className="rounded-lg p-2 text-blue-600 transition hover:bg-blue-50"
         >
             <Pencil size={18} />
         </Link>
@@ -101,14 +110,14 @@ export default function Index({ parties, filters }) {
         setSelectedParty(party);
         setOpen(true);
     }}
-    className="text-red-600 hover:text-red-800"
+    className="rounded-lg p-2 text-red-600 transition hover:bg-red-50"
 >
     <Trash2 size={18} />
 </button>
 
         <Link
             href={`/party/${party.id}`}
-            className="text-green-600 hover:text-green-800"
+            className="rounded-lg p-2 text-emerald-600 transition hover:bg-emerald-50"
         >
             <Eye size={18} />
         </Link>

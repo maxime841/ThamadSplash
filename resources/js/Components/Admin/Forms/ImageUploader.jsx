@@ -12,7 +12,7 @@ export default function ImageUploader({
     return (
         <div className="space-y-3">
 
-            <label className="block text-sm font-semibold text-gray-700">
+            <label className="block text-sm font-semibold text-slate-700">
                 {label}
             </label>
 
@@ -47,11 +47,11 @@ export default function ImageUploader({
         });
     }}
                 onClick={() => inputRef.current.click()}
-                className={`group cursor-pointer rounded-2xl border-2 border-dashed p-8 transition
+                className={`group cursor-pointer rounded-2xl border-2 border-dashed p-8 transition duration-200 ease-in-out
 ${
     dragActive
         ? "border-cyan-500 bg-cyan-100"
-        : "border-gray-300 bg-gray-50 hover:border-cyan-500 hover:bg-cyan-50"
+        : "border-slate-200 bg-slate-50 hover:border-cyan-500 bg-cyan-50 ring-4 ring-cyan-100"
 }`}
             >
 
@@ -60,7 +60,7 @@ ${
                     <img
                         src={preview}
                         alt="Aperçu"
-                        className="mx-auto h-64 rounded-xl object-cover shadow-lg"
+                        className="mx-auto h-64 rounded-xl object-cover shadow-lg transition group-hover:scale-[1.02]"
                     />
 
                 ) : (
@@ -71,15 +71,15 @@ ${
                             📷
                         </div>
 
-                        <h3 className="text-lg font-semibold text-gray-700">
+                        <h3 className="text-lg font-semibold text-slate-700">
                             Déposez votre image ici
                         </h3>
 
-                        <p className="mt-2 text-gray-500">
+                        <p className="mt-2 text-slate-500">
                             ou cliquez pour la sélectionner
                         </p>
 
-                        <p className="mt-4 text-sm text-gray-400">
+                        <p className="mt-4 text-sm text-slate-400">
                             JPG • PNG • WEBP • 2 Mo maximum
                         </p>
 

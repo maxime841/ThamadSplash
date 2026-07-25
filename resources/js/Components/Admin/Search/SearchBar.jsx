@@ -6,10 +6,11 @@ export default function SearchBar({
     placeholder = "Rechercher...",
 }) {
     return (
-        <div className="relative max-w-md">
+        <div className="relative w-full max-w-md">
+
             <Search
                 size={18}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
             />
 
             <input
@@ -17,8 +18,28 @@ export default function SearchBar({
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="w-full rounded-xl border border-gray-300 py-3 pl-10 pr-4 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-200"
+                className="
+                    h-12
+                    w-full
+                    rounded-xl
+                    border
+                    border-slate-200
+                    bg-white
+                    pl-11
+                    pr-4
+                    text-sm
+                    text-slate-700
+                    placeholder:text-slate-400
+                    shadow-sm
+                    transition-all
+                    duration-200
+                    focus:border-cyan-500
+                    focus:outline-none
+                    focus:ring-4
+                    focus:ring-cyan-100
+                "
             />
+
         </div>
     );
 }
