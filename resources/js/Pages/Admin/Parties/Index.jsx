@@ -17,6 +17,7 @@ export default function Index({ parties, filters }) {
     const [selectedParty, setSelectedParty] = useState(null);
 
     return (
+        <AdminLayout>
     <PageLayout
     title="Soirées"
     description="Gestion des soirées"
@@ -155,5 +156,6 @@ export default function Index({ parties, filters }) {
 />
 
 </PageLayout>
+</AdminLayout>
     );
 }

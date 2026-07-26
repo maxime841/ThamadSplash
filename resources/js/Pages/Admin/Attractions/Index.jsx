@@ -17,6 +17,7 @@ export default function Index({ attractions, filters }) {
     const [selectedAttraction, setSelectedAttraction] = useState(null);
 
     return (
+        <AdminLayout>
     <PageLayout
     title="Attractions"
     description="Gestion des attractions"
@@ -161,5 +162,6 @@ export default function Index({ attractions, filters }) {
 />
 
 </PageLayout>
+</AdminLayout>
     );
 }
