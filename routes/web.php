@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\PartyController;
+use App\Http\Controllers\AttractionController;
 
 Route::get('/', function () {
     return Inertia::render('Accueil', [
@@ -47,5 +48,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('parties', PartyController::class);
-
+    Route::resource('attractions', AttractionController::class);
 });
+
