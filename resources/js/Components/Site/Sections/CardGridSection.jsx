@@ -36,22 +36,24 @@ export default function CardGridSection({
 
                 <Grid>
 
-                    {items.map((item) => (
+                    {items.map((item) => {
+                        console.log(item);
 
-                        <ContentCard
-                            key={item.id}
-                            title={item.title}
-                            subtitle={item.subtitle}
-                            image={
-                                item.cover_image
-                                    ? `/storage/${item.cover_image}`
-                                    : "/images/placeholder.jpg"
-                            }
-                            href={`/${routePrefix}/${item.slug}`}
-                            badge={badge}
-                        />
-
-                    ))}
+                        return (
+                            <ContentCard
+                                key={item.id}
+                                title={item.title}
+                                subtitle={item.subtitle}
+                                image={
+                                    item.cover_image
+                                        ? `/storage/${item.cover_image}`
+                                        : "/images/placeholder.jpg"
+                                }
+                                href={`/${routePrefix}/${item.slug}`}
+                                badge={badge}
+                            />
+                        );
+                    })}
 
                 </Grid>
 

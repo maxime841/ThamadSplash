@@ -1,4 +1,4 @@
-import SectionTitle from "../Section/SectionTitle";
+import SectionTitle from "../Sections/SectionTitle";
 import Grid from "../Layout/Grid";
 import ContentCard from "../Cards/ContentCard";
 

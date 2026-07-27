@@ -6,10 +6,13 @@ import ContentDetail from "../../../Components/Site/Detail/ContentDetail";
 import DetailItem from "../../../Components/Site/Detail/DetailItem";
 import RelatedContent from "../../../Components/Site/Detail/RelatedContent";
 import CTASection from "../../../Components/Site/Sections/CTASection";
+import PreviousNextNavigation from "../../../Components/Site/Detail/PreviousNextNavigation";
 
 export default function Show({
     attraction,
     related,
+    previous,
+    next,
 }) {
     return (
         <>
@@ -65,6 +68,12 @@ export default function Show({
                     title="Autres attractions"
                     items={related}
                     badge="Attraction"
+                    routePrefix="attractions"
+                />
+
+                <PreviousNextNavigation
+                    previous={previous}
+                    next={next}
                     routePrefix="attractions"
                 />
 

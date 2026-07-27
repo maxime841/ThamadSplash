@@ -11,6 +11,8 @@ export default function HeroBanner({
     backHref,
 
     backLabel = "Retour",
+    
+    category,
 
 }) {
 
@@ -47,6 +49,12 @@ export default function HeroBanner({
                         <p className="mt-8 text-xl leading-9 text-slate-200">
 
                             {subtitle}
+
+                            {category && (
+                        <span className="inline-block rounded-full bg-cyan-500/20 px-4 py-2 text-sm font-semibold text-cyan-200">
+                            {category}
+                        </span>
+                    )}
 
                         </p>
 

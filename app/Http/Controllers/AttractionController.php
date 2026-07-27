@@ -80,15 +80,31 @@ class AttractionController extends Controller
     public function publicShow(Attraction $attraction)
 {
     abort_unless($attraction->published, 404);
-    $related = Attraction::where('published', true)
-        ->where('id', '!=', $attraction->id)
+
+    $related = Attraction::query()
+        ->where('published', true)
+        ->whereKeyNot($attraction->id)
         ->orderBy('sort_order')
-        ->take(3)
+        ->limit(3)
         ->get();
+
+    $previous = Attraction::query()
+        ->where('published', true)
+        ->where('sort_order', '<', $attraction->sort_order)
+        ->orderByDesc('sort_order')
+        ->first();
+
+    $next = Attraction::query()
+        ->where('published', true)
+        ->where('sort_order', '>', $attraction->sort_order)
+        ->orderBy('sort_order')
+        ->first();
 
     return Inertia::render('Site/Attractions/Show', [
         'attraction' => $attraction,
         'related' => $related,
+        'previous' => $previous,
+        'next' => $next,
     ]);
 }
 
