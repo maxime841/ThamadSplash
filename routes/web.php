@@ -12,6 +12,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return Inertia::render('Accueil', [
@@ -19,6 +20,13 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
+Route::get('/attractions', [AttractionController::class, 'publicIndex'])
+    ->name('attractions.index');
+Route::get('/attractions/{attraction:slug}', [AttractionController::class, 'publicShow'])
+    ->name('attractions.show');
 
 Route::get('/site', fn() => Inertia::render('Site'));
 Route::get('/parc', fn() => Inertia::render('Parc'));

@@ -1,4 +1,4 @@
-import Navbar from '../Components/Navbar';
+import Navbar from '../Components/Site/Layout/Navbar';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 

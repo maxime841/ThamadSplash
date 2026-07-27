@@ -77,10 +77,20 @@ class AttractionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Attraction $attraction)
-    {
-        //
-    }
+    public function publicShow(Attraction $attraction)
+{
+    abort_unless($attraction->published, 404);
+    $related = Attraction::where('published', true)
+        ->where('id', '!=', $attraction->id)
+        ->orderBy('sort_order')
+        ->take(3)
+        ->get();
+
+    return Inertia::render('Site/Attractions/Show', [
+        'attraction' => $attraction,
+        'related' => $related,
+    ]);
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -143,5 +153,16 @@ class AttractionController extends Controller
     return redirect()
         ->route('admin.attractions.index')
         ->with('success', 'Attraction supprimée avec succès.');
+}
+
+public function publicIndex()
+{
+    $attractions = Attraction::where('published', true)
+        ->orderBy('sort_order')
+        ->get();
+
+    return Inertia::render('Site/Attractions/Index', [
+        'attractions' => $attractions,
+    ]);
 }
 }

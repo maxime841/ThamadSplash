@@ -1,4 +1,4 @@
-import Navbar from '../Components/Navbar';
+import Navbar from '../Components/Site/Layout/Navbar';
 import { Link } from '@inertiajs/react';
 
 export default function Site() {
@@ -35,9 +35,6 @@ return (
             </div>
         </section>
     </main>
-    <footer className="bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-700 text-white py-6 text-center">
-        <p>&copy; 2023 ThaMad Splash. Tous droits réservés.</p>
-    </footer>
     </>
 )
 }

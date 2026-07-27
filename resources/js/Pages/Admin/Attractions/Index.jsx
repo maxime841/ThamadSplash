@@ -121,7 +121,7 @@ export default function Index({ attractions, filters }) {
 </button>
 
         <Link
-            href={`/attraction/${attraction.id}`}
+            href={`/attractions/${attraction.slug}`}
             className="rounded-lg p-2 text-emerald-600 transition hover:bg-emerald-50"
         >
             <Eye size={18} />

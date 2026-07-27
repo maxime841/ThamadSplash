@@ -135,7 +135,7 @@ export default function Index({ prices, filters }) {
                                 <div className="flex items-center gap-3">
 
                                     <Link
-                                        href={route("admin.prices.edit", price.id)}
+                                        href={route("admin.prices.edit", price.slug)}
                                         className="rounded-lg p-2 text-blue-600 hover:bg-blue-50"
                                     >
                                         <Pencil size={18} />

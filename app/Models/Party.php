@@ -25,4 +25,9 @@ public function media(): MorphMany
     return $this->morphMany(Media::class, 'mediable')
         ->orderBy('sort_order');
 }
+
+public function getRouteKeyName(): string
+{
+    return 'slug';
+}
 }

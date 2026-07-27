@@ -100,7 +100,7 @@ export default function Index({ parties, filters }) {
             <td className="px-6 py-5 align-middle">
     <div className="flex items-center gap-3">
         <Link
-            href={route("admin.parties.edit", party.id)}
+            href={route("admin.parties.edit", party.slug)}
             className="rounded-lg p-2 text-blue-600 transition hover:bg-blue-50"
         >
             <Pencil size={18} />

@@ -22,4 +22,9 @@ class Rental extends Model
         'sort_order',
         'published',
     ];
+
+    public function getRouteKeyName(): string
+{
+    return 'slug';
+}
 }

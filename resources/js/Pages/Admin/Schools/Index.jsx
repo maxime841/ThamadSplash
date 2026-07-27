@@ -104,7 +104,7 @@ export default function Index({ schools, filters }) {
                                 <div className="flex gap-3">
 
                                     <Link
-                                        href={route("admin.schools.edit", school.id)}
+                                        href={route("admin.schools.edit", school.slug)}
                                         className="p-2 rounded-lg text-blue-600 hover:bg-blue-50"
                                     >
                                         <Pencil size={18}/>

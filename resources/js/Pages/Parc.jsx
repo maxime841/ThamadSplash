@@ -1,4 +1,4 @@
-import Navbar from '../Components/Navbar';
+import Navbar from '../Components/Site/Layout/Navbar';
 
 export default function Parc() {
     return (

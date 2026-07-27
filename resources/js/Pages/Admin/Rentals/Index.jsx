@@ -133,7 +133,7 @@ export default function Index({ rentals, filters }) {
                                 <div className="flex items-center gap-3">
 
                                     <Link
-                                        href={route("admin.rentals.edit", rental.id)}
+                                        href={route("admin.rentals.edit", rental.slug)}
                                         className="rounded-lg p-2 text-blue-600 hover:bg-blue-50"
                                     >
                                         <Pencil size={18} />

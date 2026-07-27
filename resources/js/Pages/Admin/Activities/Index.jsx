@@ -128,7 +128,7 @@ export default function Index({ activities, filters }) {
                                 <div className="flex items-center gap-3">
 
                                     <Link
-                                        href={route("admin.activities.edit", activity.id)}
+                                        href={route("admin.activities.edit", activity.slug)}
                                         className="rounded-lg p-2 text-blue-600 hover:bg-blue-50"
                                     >
                                         <Pencil size={18} />
