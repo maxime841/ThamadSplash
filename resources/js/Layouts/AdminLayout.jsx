@@ -69,7 +69,7 @@ export default function AdminLayout({ children }) {
                     </Link>
 
                     <Link
-                        href="/admin/school"
+                        href="/admin/schools"
                         className="flex items-center rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white"
                     >
                         🎓 École

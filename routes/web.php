@@ -11,6 +11,7 @@ use App\Http\Controllers\AttractionController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\SchoolController;
 
 Route::get('/', function () {
     return Inertia::render('Accueil', [
@@ -55,5 +56,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('activities', ActivityController::class);
     Route::resource('prices', PriceController::class);
     Route::resource('rentals', RentalController::class);
+    Route::resource('schools', SchoolController::class);
+    
 });
 
