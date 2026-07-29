@@ -34,7 +34,7 @@ export default function Home({
 
             <ContentSection
                 eyebrow="Évènements"
-                title="Les prochaines soirées"
+                title="Nos soirées"
                 subtitle="Ne manquez aucun événement."
                 items={parties}
                 badge="Soirée"
@@ -61,7 +61,7 @@ export default function Home({
 
             <ContentSection
                 eyebrow="Location"
-                title="Nos espaces"
+                title="Nos espaces de vie"
                 subtitle="Louez votre propre espace."
                 items={rentals}
                 badge="Location"

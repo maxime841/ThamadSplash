@@ -110,4 +110,47 @@ public function index(Request $request)
     return redirect()->route('admin.parties.index')
         ->with('success', 'Soirée supprimée avec succès.');
 }
+
+public function publicIndex()
+{
+    $parties = Party::query()
+        ->where('published', true)
+        ->orderBy('sort_order')
+        ->get();
+
+    return Inertia::render('Site/Parties/Index', [
+        'parties' => $parties,
+    ]);
+}
+
+public function publicShow(Party $party)
+{
+    abort_unless($party->published, 404);
+
+    $related = Party::query()
+        ->where('published', true)
+        ->whereKeyNot($party->id)
+        ->orderBy('sort_order')
+        ->limit(3)
+        ->get();
+
+    $previous = Party::query()
+        ->where('published', true)
+        ->where('sort_order', '<', $party->sort_order)
+        ->orderByDesc('sort_order')
+        ->first();
+
+    $next = Party::query()
+        ->where('published', true)
+        ->where('sort_order', '>', $party->sort_order)
+        ->orderBy('sort_order')
+        ->first();
+
+    return Inertia::render('Site/Parties/Show', [
+        'party' => $party,
+        'related' => $related,
+        'previous' => $previous,
+        'next' => $next,
+    ]);
+}
 }

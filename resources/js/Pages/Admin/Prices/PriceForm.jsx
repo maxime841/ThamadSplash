@@ -1,4 +1,4 @@
-import { useForm } from "@inertiajs/react";
+import { userForm } from "@inertiajs/react";
 import { route } from "../../../lib/route";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ import PrimaryButton from "../../../Components/Admin/Button/PrimaryButton";
 
 export default function PriceForm({ price = null }) {
 
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, put, processing, errors } = userForm({
         title: price?.title || "",
         description: price?.description || "",
         price: price?.price || "",
@@ -29,7 +29,7 @@ export default function PriceForm({ price = null }) {
         e.preventDefault();
 
         if (price) {
-            put(route("admin.prices.update", price.id), {
+            put(route("admin.prices.update", price.slug), {
                 forceFormData: true,
             });
         } else {
@@ -65,7 +65,7 @@ export default function PriceForm({ price = null }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <InputField
-                    label="Prix (€)"
+                    label="Prix (L$)"
                     name="price"
                     type="number"
                     value={data.price}

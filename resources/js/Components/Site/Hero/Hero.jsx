@@ -7,7 +7,7 @@ export default function Hero() {
         <section className="relative overflow-hidden">
 
             <img
-                src="/images/hero.jpg"
+                src="/images/Parc_aquatique_ThamadSplash.png"
                 className="h-[85vh] w-full object-cover"
                 alt=""
             />
@@ -40,7 +40,7 @@ export default function Hero() {
 
                     <div className="mt-10">
 
-                        <PrimaryButton href="/activities">
+                        <PrimaryButton href="/attractions">
 
                             Découvrir
 

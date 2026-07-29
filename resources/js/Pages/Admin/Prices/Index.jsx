@@ -105,7 +105,7 @@ export default function Index({ prices, filters }) {
                             </td>
 
                             <td className="px-6 py-5 font-semibold">
-                                {Number(price.price).toFixed(2)} €
+                                {Number(price.price).toFixed(2)} L$
                             </td>
 
                             <td className="px-6 py-5">

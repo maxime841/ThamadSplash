@@ -125,4 +125,47 @@ class SchoolController extends Controller
             ->route('admin.schools.index')
             ->with('success', 'Formation supprimée avec succès.');
     }
+
+    public function publicIndex()
+{
+    $schools = School::query()
+        ->where('published', true)
+        ->orderBy('sort_order')
+        ->get();
+
+    return Inertia::render('Site/Schools/Index', [
+        'schools' => $schools,
+    ]);
+}
+
+public function publicShow(School $school)
+{
+    abort_unless($school->published, 404);
+
+    $related = School::query()
+        ->where('published', true)
+        ->whereKeyNot($school->id)
+        ->orderBy('sort_order')
+        ->limit(3)
+        ->get();
+
+    $previous = School::query()
+        ->where('published', true)
+        ->where('sort_order', '<', $school->sort_order)
+        ->orderByDesc('sort_order')
+        ->first();
+
+    $next = School::query()
+        ->where('published', true)
+        ->where('sort_order', '>', $school->sort_order)
+        ->orderBy('sort_order')
+        ->first();
+
+    return Inertia::render('Site/Schools/Show', [
+        'school' => $school,
+        'related' => $related,
+        'previous' => $previous,
+        'next' => $next,
+    ]);
+}
 }

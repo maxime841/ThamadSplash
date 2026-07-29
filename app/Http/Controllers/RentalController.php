@@ -152,4 +152,47 @@ class RentalController extends Controller
             ->route('admin.rentals.index')
             ->with('success', 'Location supprimée avec succès.');
     }
+
+    public function publicIndex()
+{
+    $rentals = Rental::query()
+        ->where('published', true)
+        ->orderBy('sort_order')
+        ->get();
+
+    return Inertia::render('Site/Rentals/Index', [
+        'rentals' => $rentals,
+    ]);
+}
+
+public function publicShow(Rental $rental)
+{
+    abort_unless($rental->published, 404);
+
+    $related = Rental::query()
+        ->where('published', true)
+        ->whereKeyNot($rental->id)
+        ->orderBy('sort_order')
+        ->limit(3)
+        ->get();
+
+    $previous = Rental::query()
+        ->where('published', true)
+        ->where('sort_order', '<', $rental->sort_order)
+        ->orderByDesc('sort_order')
+        ->first();
+
+    $next = Rental::query()
+        ->where('published', true)
+        ->where('sort_order', '>', $rental->sort_order)
+        ->orderBy('sort_order')
+        ->first();
+
+    return Inertia::render('Site/Rentals/Show', [
+        'rental' => $rental,
+        'related' => $related,
+        'previous' => $previous,
+        'next' => $next,
+    ]);
+}
 }

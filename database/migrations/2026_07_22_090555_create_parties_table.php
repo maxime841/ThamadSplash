@@ -31,6 +31,10 @@ return new class extends Migration
 
         $table->string('cover_image')->nullable();
 
+        $table->string('category')->nullable();
+
+        $table->unsignedInteger('sort_order')->default(0);
+
         $table->boolean('published')->default(false);
 
         $table->timestamps();

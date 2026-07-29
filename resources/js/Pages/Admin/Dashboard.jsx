@@ -1,42 +1,48 @@
 import AdminLayout from "../../Layouts/AdminLayout";
-import StatCard from "../../Components/Admin/StatCard";
+import PageLayout from "../../Components/Admin/Layout/PageLayout";
 
-export default function Dashboard() {
+import DashboardHeader from "../../Components/Admin/Dashboard/DashboardHeader";
+import DashboardStatsGrid from "../../Components/Admin/Dashboard/DashboardStatsGrid";
+import DashboardQuickActions from "../../Components/Admin/Dashboard/DashboardQuickActions";
+import DashboardTimeline from "../../Components/Admin/Dashboard/DashboardTimeline";
+import DashboardDraftSummary from "../../Components/Admin/Dashboard/DashboardDraftSummary";
+import DashboardFooter from "../../Components/Admin/Dashboard/DashboardFooter";
 
+export default function Dashboard({
+    stats,
+    drafts,
+    timeline,
+}) {
     return (
         <AdminLayout>
 
-            <h1 className="text-4xl font-bold mb-8">
-                Tableau de bord
-            </h1>
+            <PageLayout>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <DashboardHeader />
 
-                <StatCard
-                    title="Soirées"
-                    value="0"
-                    icon="🎉"
-                />
+                <DashboardStatsGrid stats={stats} />
 
-                <StatCard
-                    title="Attractions"
-                    value="0"
-                    icon="🎢"
-                />
+                <div className="mt-10 grid gap-8 xl:grid-cols-3">
 
-                <StatCard
-                    title="Locations"
-                    value="0"
-                    icon="🏠"
-                />
+                    <div>
+                        <DashboardQuickActions />
+                    </div>
 
-                <StatCard
-                    title="Activités"
-                    value="0"
-                    icon="🎯"
-                />
+                    <div className="xl:col-span-2">
+                        <DashboardTimeline timeline={timeline} />
+                    </div>
 
-            </div>
+                </div>
+
+                <div className="mt-8">
+
+                    <DashboardDraftSummary drafts={drafts} />
+
+                </div>
+
+                <DashboardFooter />
+
+            </PageLayout>
 
         </AdminLayout>
     );

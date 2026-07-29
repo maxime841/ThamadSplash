@@ -140,4 +140,18 @@ class PriceController extends Controller
         ->route('admin.prices.index')
         ->with('success', 'Tarif supprimé avec succès.');
 }
+
+public function publicIndex()
+{
+    $prices = Price::query()
+        ->where('published', true)
+        ->orderBy('category')
+        ->orderBy('sort_order')
+        ->get()
+        ->groupBy('category');
+
+    return Inertia::render('Site/Prices/Index', [
+        'prices' => $prices,
+    ]);
+}
 }

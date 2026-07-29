@@ -28,13 +28,13 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        if (!Auth::user()->is_admin) {
-            Auth::logout();
+        if (!in_array(Auth::user()->role, ['admin', 'super-admin'])) {
+    Auth::logout();
 
-            return back()->withErrors([
-                'email' => 'Accès refusé.',
-            ]);
-        }
+    return back()->withErrors([
+        'email' => 'Accès refusé.',
+    ]);
+}
 
         return redirect('/admin');
     }

@@ -28,6 +28,11 @@ export default function Navbar() {
             href: "/activities",
         },
 
+         {
+            label: "Club",
+            href: "/parties",
+        },
+
         {
             label: "Tarifs",
             href: "/prices",
@@ -40,7 +45,7 @@ export default function Navbar() {
 
         {
             label: "École",
-            href: "/school",
+            href: "/schools",
         },
 
         {
@@ -48,6 +53,10 @@ export default function Navbar() {
             href: "/contact",
         },
 
+        {
+            label: "Se connecter",
+            href: "/login",
+        },
     ];
 
     return (

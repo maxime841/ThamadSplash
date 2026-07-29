@@ -75,10 +75,36 @@ class ActivityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Activity $activity)
-    {
-        //
-    }
+    public function publicShow(Activity $activity)
+{
+    abort_unless($activity->published, 404);
+
+    $related = Activity::query()
+        ->where('published', true)
+        ->whereKeyNot($activity->id)
+        ->orderBy('sort_order')
+        ->limit(3)
+        ->get();
+
+    $previous = Activity::query()
+        ->where('published', true)
+        ->where('sort_order', '<', $activity->sort_order)
+        ->orderByDesc('sort_order')
+        ->first();
+
+    $next = Activity::query()
+        ->where('published', true)
+        ->where('sort_order', '>', $activity->sort_order)
+        ->orderBy('sort_order')
+        ->first();
+
+    return Inertia::render('Site/Activities/Show', [
+        'activity' => $activity,
+        'related' => $related,
+        'previous' => $previous,
+        'next' => $next,
+    ]);
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -140,4 +166,15 @@ class ActivityController extends Controller
         ->route('admin.activities.index')
         ->with('success', 'Activité supprimée avec succès.');
     }
+
+    public function publicIndex()
+{
+    $activities = Activity::where('published', true)
+        ->orderBy('sort_order')
+        ->get();
+
+    return Inertia::render('Site/Activities/Index', [
+        'activities' => $activities,
+    ]);
+}
 }

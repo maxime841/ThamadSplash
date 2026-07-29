@@ -16,7 +16,7 @@ export default function AboutSection() {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
 
                 <img
-                    src="/images/about.jpg"
+                    src="../../images/Parc_vue_de_haut.png"
                     className="rounded-3xl shadow-xl"
                     alt=""
                 />

@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\AttractionController;
 use App\Http\Controllers\ActivityController;
@@ -13,29 +14,42 @@ use App\Http\Controllers\PriceController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactMessageController;
 
-Route::get('/', function () {
-    return Inertia::render('Accueil', [
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/', [HomeController::class, 'index'])
+    Route::get('/', [HomeController::class, 'index'])
     ->name('home');
-Route::get('/attractions', [AttractionController::class, 'publicIndex'])
+    Route::get('/attractions', [AttractionController::class, 'publicIndex'])
     ->name('attractions.index');
-Route::get('/attractions/{attraction:slug}', [AttractionController::class, 'publicShow'])
+    Route::get('/attractions/{attraction:slug}', [AttractionController::class, 'publicShow'])
     ->name('attractions.show');
 
-Route::get('/site', fn() => Inertia::render('Site'));
-Route::get('/parc', fn() => Inertia::render('Parc'));
-Route::get('/school', fn() => Inertia::render('Ecole'));
-Route::get('/club', fn() => Inertia::render('Club'));
-Route::get('/rent', fn() => Inertia::render('Location'));
-Route::get('/activities', fn() => Inertia::render('Activites'));
-Route::get('/contact', fn() => Inertia::render('Contact'));
+    Route::get('/activities', [ActivityController::class, 'publicIndex'])
+    ->name('activities.index');
+    Route::get('/activities/{activity:slug}', [ActivityController::class, 'publicShow'])
+    ->name('activities.show');
 
+    Route::get('/parties', [PartyController::class, 'publicIndex'])
+    ->name('parties.index');
+
+    Route::get('/parties/{party:slug}', [PartyController::class, 'publicShow'])
+    ->name('parties.show');
+
+    Route::get('/rentals', [RentalController::class, 'publicIndex'])
+    ->name('rentals.index');
+
+    Route::get('/rentals/{rental:slug}', [RentalController::class, 'publicShow'])
+    ->name('rentals.show');
+
+    Route::get('/schools', [SchoolController::class, 'publicIndex'])
+    ->name('schools.index');
+
+    Route::get('/schools/{school:slug}', [SchoolController::class, 'publicShow'])
+    ->name('schools.show');
+
+    Route::get('/prices', [PriceController::class, 'publicIndex'])
+    ->name('prices.index');
+    Route::get('/contact', function () {return Inertia::render('Site/Contact');})->name('contact');
+    Route::post('/contact',[ContactMessageController::class, 'store'])->name('contact.store');
 /*
 |--------------------------------------------------------------------------
 | Auth
@@ -45,26 +59,39 @@ Route::get('/contact', fn() => Inertia::render('Contact'));
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::get('/register', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 /*
 |--------------------------------------------------------------------------
 | Administration
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index']);
-});
+        Route::get('/', [DashboardController::class, 'index'])
+            ->name('dashboard');
+        Route::resource('parties', PartyController::class);
+        Route::resource('attractions', AttractionController::class);
+        Route::resource('activities', ActivityController::class);
+        Route::resource('prices', PriceController::class);
+        Route::resource('rentals', RentalController::class);
+        Route::resource('schools', SchoolController::class);
+        Route::get('/contact-messages',[ContactMessageController::class, 'index'])->name('admin.contact-messages.index');
+        Route::get('/contact-messages/{contactMessage}',[ContactMessageController::class, 'show'])->name('admin.contact-messages.show');
+        Route::delete('/contact-messages/{contactMessage}',[ContactMessageController::class, 'destroy'])->name('admin.contact-messages.destroy');
+    });
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['auth', 'super-admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-    Route::resource('parties', PartyController::class);
-    Route::resource('attractions', AttractionController::class);
-    Route::resource('activities', ActivityController::class);
-    Route::resource('prices', PriceController::class);
-    Route::resource('rentals', RentalController::class);
-    Route::resource('schools', SchoolController::class);
-    
-});
+        Route::resource('users', UserController::class);
+
+    });
+
 
