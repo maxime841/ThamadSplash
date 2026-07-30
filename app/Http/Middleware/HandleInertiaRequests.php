@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+    use App\Models\Setting;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -29,9 +30,10 @@ class HandleInertiaRequests extends Middleware
      * @return array<string, mixed>
      */
     public function share(Request $request): array
+
 {
-    return [
-        ...parent::share($request),
+    return array_merge(parent::share($request), [
+        'settings' => fn () => Setting::pluck('value', 'key'),
 
         'auth' => [
             'user' => $request->user(),
@@ -42,10 +44,9 @@ class HandleInertiaRequests extends Middleware
             'error' => fn () => $request->session()->get('error'),
         ],
 
-        'ziggy' => [
-            ...(new Ziggy)->toArray(),
+        'ziggy' => array_merge((new Ziggy)->toArray(), [
             'location' => $request->url(),
-        ],
-    ];
+        ]),
+    ]);
 }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use Inertia\Inertia;
 
 use App\Http\Controllers\AuthController;
@@ -15,6 +14,7 @@ use App\Http\Controllers\RentalController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\SettingController;
 
     Route::get('/', [HomeController::class, 'index'])
     ->name('home');
@@ -80,9 +80,9 @@ Route::middleware(['auth', 'admin'])
         Route::resource('prices', PriceController::class);
         Route::resource('rentals', RentalController::class);
         Route::resource('schools', SchoolController::class);
-        Route::get('/contact-messages',[ContactMessageController::class, 'index'])->name('admin.contact-messages.index');
-        Route::get('/contact-messages/{contactMessage}',[ContactMessageController::class, 'show'])->name('admin.contact-messages.show');
-        Route::delete('/contact-messages/{contactMessage}',[ContactMessageController::class, 'destroy'])->name('admin.contact-messages.destroy');
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
+       Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
     });
 
     Route::middleware(['auth', 'super-admin'])

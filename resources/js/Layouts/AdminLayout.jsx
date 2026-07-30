@@ -117,6 +117,27 @@ export default function AdminLayout({ children }) {
                 <div className="border-t border-slate-800 p-4">
 
                     <Link
+                        href={route("admin.contact-messages.index")}
+                        className={`block rounded-lg px-4 py-3 ${
+                        url.startsWith("/admin/contact-messages")
+                        ? "bg-cyan-600 text-white"
+                        : "hover:bg-slate-800"
+                        }`}
+                    >
+    📨 Messages
+</Link>
+                    <Link
+                        href={route("admin.settings.index")}
+                        className={`block rounded-lg px-4 py-3 ${
+                        url.startsWith("/admin/settings")
+                        ? "bg-cyan-600 text-white"
+                        : "hover:bg-slate-800"
+                    }`}
+                    >
+                    ⚙️ Paramètres
+                    </Link>
+
+                    <Link
                         href={route("logout")}
                         method="post"
                         as="button"

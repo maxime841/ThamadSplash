@@ -3,6 +3,7 @@ import {
     Trophy,
     House,
     PartyPopper,
+    Mail,
 } from "lucide-react";
 
 const icons = {
@@ -10,9 +11,10 @@ const icons = {
     activity: Trophy,
     house: House,
     party: PartyPopper,
+    message: Mail,
 };
 
-export default function DashboardTimeline({ timeline }) {
+export default function DashboardTimeline({ timeline = [] }) {
 
     return (
 
@@ -25,7 +27,7 @@ export default function DashboardTimeline({ timeline }) {
                 </h2>
 
                 <span className="rounded-full bg-slate-100 px-4 py-2 text-sm">
-                    {timeline.length} éléments
+                    {timeline?.length} éléments
                 </span>
 
             </div>

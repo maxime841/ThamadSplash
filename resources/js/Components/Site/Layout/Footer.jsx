@@ -1,4 +1,5 @@
 export default function Footer() {
+    
     return (
         <footer className="mt-24 bg-slate-900 text-slate-300">
 

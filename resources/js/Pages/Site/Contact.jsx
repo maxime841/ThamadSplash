@@ -1,3 +1,4 @@
+import { usePage } from '@inertiajs/react';
 import SiteLayout from "../../Layouts/SiteLayout";
 import Seo from "../../Components/Site/Seo/Seo";
 
@@ -7,11 +8,13 @@ import ContactForm from "../../Components/Site/Contact/ContactForm";
 
 export default function Contact() {
 
+    const { settings } = usePage().props;
+
     return (
 
         <>
             <Seo
-                title="Contact - ThaMad Splash"
+                title={settings.site_name}
                 description="Contactez l'équipe ThaMad Splash."
             />
 

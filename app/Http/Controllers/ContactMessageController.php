@@ -58,20 +58,18 @@ class ContactMessageController extends Controller
     /**
      * Affichage d'un message.
      */
-    public function show(ContactMessage $contactMessage): Response
-    {
-        if (! $contactMessage->is_read) {
-
-            $contactMessage->update([
-                'is_read' => true,
-            ]);
-
-        }
-
-        return Inertia::render('Admin/ContactMessages/Show', [
-            'message' => $contactMessage,
+    public function show(ContactMessage $contactMessage)
+{
+    if (!$contactMessage->read_at) {
+        $contactMessage->update([
+            'read_at' => now(),
         ]);
     }
+
+    return inertia('Admin/ContactMessages/Show', [
+        'message' => $contactMessage,
+    ]);
+}
 
     /**
      * Suppression.
