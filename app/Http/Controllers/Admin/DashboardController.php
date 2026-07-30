@@ -64,6 +64,8 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        $timeline = [];
+
         return Inertia::render('Admin/Dashboard', [
 
             'stats' => $stats,
