@@ -59,7 +59,7 @@ use App\Http\Controllers\SettingController;
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/register', [AuthController::class, 'loginForm'])->name('login');
+Route::get('/register', [AuthController::class, 'loginForm'])->name('register');
 Route::post('/login', [AuthController::class, 'login']);
 /*
 |--------------------------------------------------------------------------
