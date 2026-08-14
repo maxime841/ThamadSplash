@@ -29,7 +29,7 @@ export default function ActivityForm({ activity = null }) {
         e.preventDefault();
 
         if (activity) {
-            put(route("admin.activities.update", activity.id), {
+            put(route("admin.activities.update", activity.slug), {
                 forceFormData: true,
             });
         } else {

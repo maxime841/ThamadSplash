@@ -187,7 +187,7 @@ export default function Index({ prices, filters }) {
                         if (!selectedPrice) return;
 
                         router.delete(
-                            route("admin.prices.destroy", selectedPrice.id),
+                            route("admin.prices.destroy", selectedPrice.slug),
                             {
                                 onSuccess: () => {
                                     setOpen(false);

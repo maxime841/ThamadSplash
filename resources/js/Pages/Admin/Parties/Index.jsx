@@ -144,7 +144,7 @@ export default function Index({ parties, filters }) {
     }}
     onConfirm={() => {
         router.delete(
-            route("admin.parties.destroy", selectedParty.id),
+            route("admin.parties.destroy", selectedParty.slug),
             {
                 onSuccess: () => {
                     setOpen(false);

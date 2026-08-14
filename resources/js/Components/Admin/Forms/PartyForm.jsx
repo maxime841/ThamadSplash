@@ -27,7 +27,7 @@ export default function PartyForm({ party = null }) {
         e.preventDefault();
 
         if (party) {
-            put(route("admin.parties.update", party.id));
+            put(route("admin.parties.update", party.slug));
         } else {
             post(route("admin.parties.store"));
         }

@@ -184,7 +184,7 @@ export default function Index({ rentals, filters }) {
                         if (!selectedRental) return;
 
                         router.delete(
-                            route("admin.rentals.destroy", selectedRental.id),
+                            route("admin.rentals.destroy", selectedRental.slug),
                             {
                                 onSuccess: () => {
                                     setOpen(false);

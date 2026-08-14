@@ -42,7 +42,7 @@ export default function RentalForm({ rental = null }) {
         e.preventDefault();
 
         if (rental) {
-            put(route("admin.rentals.update", rental.id), {
+            put(route("admin.rentals.update", rental.slug), {
                 forceFormData: true,
             });
         } else {

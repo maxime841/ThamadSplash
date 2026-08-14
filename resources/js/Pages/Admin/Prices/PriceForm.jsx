@@ -1,4 +1,4 @@
-import { userForm } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 import { route } from "../../../lib/route";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ import PrimaryButton from "../../../Components/Admin/Button/PrimaryButton";
 
 export default function PriceForm({ price = null }) {
 
-    const { data, setData, post, put, processing, errors } = userForm({
+    const { data, setData, post, put, processing, errors } = useForm({
         title: price?.title || "",
         description: price?.description || "",
         price: price?.price || "",

@@ -32,7 +32,7 @@ export default function SchoolForm({ school = null }) {
         e.preventDefault();
 
         if (school) {
-            put(route("admin.schools.update", school.id), {
+            put(route("admin.schools.update", school.slug), {
                 forceFormData: true,
             });
         } else {

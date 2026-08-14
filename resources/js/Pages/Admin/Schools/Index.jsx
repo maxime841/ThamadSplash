@@ -153,7 +153,7 @@ export default function Index({ schools, filters }) {
                     }}
                     onConfirm={()=>{
                         router.delete(
-                            route("admin.schools.destroy", selectedSchool.id),
+                            route("admin.schools.destroy", selectedSchool.slug),
                             {
                                 onSuccess: ()=>{
                                     setOpen(false);

@@ -180,7 +180,7 @@ export default function Index({ activities, filters }) {
                         if (!selectedActivity) return;
 
                         router.delete(
-                            route("admin.activities.destroy", selectedActivity.id),
+                            route("admin.activities.destroy", selectedActivity.slug),
                             {
                                 onSuccess: () => {
                                     setOpen(false);
