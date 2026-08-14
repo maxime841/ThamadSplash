@@ -1,6 +1,6 @@
 import AdminLayout from "../../../Layouts/AdminLayout";
 import PageLayout from "../../../Components/Admin/Layout/PageLayout";
-import PriceForm from "./PriceForm";
+import PriceForm from "../../Admin/Prices/PriceForm";
 
 
 import { router } from "@inertiajs/react";
