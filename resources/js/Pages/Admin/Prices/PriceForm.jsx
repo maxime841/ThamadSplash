@@ -3,7 +3,7 @@ import { route } from "../../../lib/route";
 import { useState } from "react";
 
 import InputField from "../../../Components/Admin/Forms/InputField";
-import TextareaField from "../../../Components/Admin/Forms/TextareaField";
+import TextAreaField from "../../../Components/Admin/Forms/TextAreaField";
 import ImageUploader from "../../../Components/Admin/Forms/ImageUploader";
 import PrimaryButton from "../../../Components/Admin/Button/PrimaryButton";
 
@@ -54,7 +54,7 @@ export default function PriceForm({ price = null }) {
                 error={errors.title}
             />
 
-            <TextareaField
+            <TextAreaField
                 label="Description"
                 name="description"
                 value={data.description}

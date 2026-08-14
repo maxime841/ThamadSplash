@@ -1,4 +1,4 @@
-export default function TextareaField({
+export default function TextAeaField({
     label,
     name,
     value,

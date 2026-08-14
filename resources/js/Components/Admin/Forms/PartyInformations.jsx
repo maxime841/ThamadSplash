@@ -1,5 +1,5 @@
 import InputField from "./InputField";
-import TextareaField from "./TextareaField";
+import TextAreaField from "./TextAreaField";
 import DateField from "./DateField";
 import TimeField from "./TimeField";
 
@@ -27,7 +27,7 @@ export default function PartyInformations({
                 error={errors.subtitle}
             />
 
-            <TextareaField
+            <TextAreaField
                 label="Description"
                 name="description"
                 value={data.description}
